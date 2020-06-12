@@ -1,0 +1,113 @@
+html {
+  color: #a67c00 ;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  padding: 50px 150px 50px 150px;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.icon-bar {
+  height: 50%;
+  background-color: #a67c00;
+  margin-right: 50px;
+}
+
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  transition: all 0.3s ease;
+  color: #a67c00;
+  font-size: 36px;
+}
+
+.icon-bar a img {
+  height: 30px;
+  width: 30px;
+}
+
+.icon-bar a:hover {
+  background-color: rgba(0,0,0,0.3);
+}
+
+.active {
+  background-color: #a67c00;
+  color: #000000;
+}
+
+
+
+.intro {
+  margin-bottom: 50px;
+}
+
+.partnerline {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  margin-bottom: 50px;
+}
+
+.partnerline hr {
+  width: 50%;
+  height:0px;
+  text-align: right;
+  margin-right: 0;
+  border-color: #a67c00
+}
+
+.partnerline p {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 0px;
+  text-transform: uppercase;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 50px;
+  grid-row-gap: 50px;
+  padding: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  border-style: solid;
+  border-color: #a67c00;
+  border-width: 2px;
+  justify-content: space-between;
+}
+
+.card img {
+  width: 50px;
+  height: 50px;
+  margin-right: 30px;
+}
+
+.contact {
+  background-color: #a67c00;
+  color: black;
+  padding: 0 10px 0 10px;
+}
+
+.contact-mail, .contact-phone {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0px;
+}
+
+.contact-mail img, .contact-phone img {
+  margin-right: 10px;
+  height: 25px;
+  width: 25px;
+}
+

@@ -1,0 +1,89 @@
+html {
+  color: #a67c00 ;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  padding: 50px 150px 50px 150px;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+}
+
+.icon-bar {
+  height: 50%;
+  background-color: #a67c00;
+  margin-right: 50px;
+}
+
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  transition: all 0.3s ease;
+  color: #a67c00;
+  font-size: 36px;
+}
+
+.icon-bar a img {
+  height: 30px;
+  width: 30px;
+}
+
+.icon-bar a:hover {
+  background-color: rgba(0,0,0,0.3);
+}
+
+.active {
+  background-color: #a67c00;
+  color: #000000;
+}
+
+.hotelBlock {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hotelBlock .titleSearch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0px;
+}
+
+.hotelBlock .titleSearch .searchBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.hotelBlock .titleSearch .searchBlock input {
+  outline: none;
+  height: 30px;
+  width: 250px;
+  border-style: none;
+  padding: 0 10px 0 10px;
+  font-size: medium;
+  color: #a67c00;
+}
+
+.hotelBlock .titleSearch .searchBlock button {
+  outline: none;
+  height: 30px;
+  background-color: #a67c00;
+  border-style: none;
+  font-size: smaller;
+  text-transform: uppercase;
+  margin-left: 5px;
+}
+
+/*.hotelBlock .titleSearch h2 {
+}  */
+
+.hotelBlock .hotelList {
+  background-color: white;
+  height: 300px;
+}

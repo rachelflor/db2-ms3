@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="booking.css">
+    <title>Buchung</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="/img/icons8-lit-80.png" />
+
+
+</head>
+<body>
+
+<div class="icon-bar">
+  <a class="active" href="/src/pages/hotels/hotel.html"><img src="/img/hotel.png"/></a>
+  <a href="/src/pages/bars/bar.html"><img src="/img/wine.png"/></a>
+  <a href="/src/pages/booking/booking.html"><img src="/img/calendar.png"/></a>
+  <a href="/src/pages/reservation/reservation.html"><img src="/img/calendarR.png"/></a>
+  <a href="/src/pages/contact/contact.html"><img src="/img/contact.png"/></a>
+</div>
+
+<div class="information">
+  <h2>Genießen Sie friedliche Momente in vollem Komfort.</h2>
+  <p>Für eine objektive Suche wählen Sie bitte Ihr Zielhotel aus der Liste der verfügbaren Hotels aus.</p>
+  <button type="button" onclick="openHotel()">Go to Hotels</button>
+</div>
+
+<form method="post">
+<div class="bookingBlock">
+  <h2>Buche ein Hotelzimmer</h2>
+  <h5>Buche online. Aufenthaltsräume mit Check-in und Check-out am selben Tag</h5>
+  <div class="inputBlock">
+    <label for="arrivalDate">Ankunft</label>
+    <input type="date" id="arrivalDate"/>
+  </div>
+  <div class="inputBlock">
+     <label for="departureDate">Abreise</label>
+     <input type="date" id="departureDate"/>
+  </div>
+  <div class="inputBlock">
+    <label for="country">Land</label>
+    <div class="inputBlockSelect">
+    <select id="country" name="country">
+      <option value="Deutschland">Deutschland</option>
+      <option value="dog">Dog</option>
+      <option value="cat">Cat</option>
+      <option value="hamster">Hamster</option>
+      <option value="parrot">Parrot</option>
+      <option value="spider">Spider</option>
+      <option value="goldfish">Goldfish</option>
+    </select>
+    </div>
+  </div>
+
+  <div class="inputBlock">
+    <label for="hotel">Hotel</label>
+    <div class="inputBlockSelect">
+    <select id="hotel" name="hotel">
+      <option value="Deutschland">Deutschland</option>
+      <option value="dog">Dog</option>
+      <option value="cat">Cat</option>
+      <option value="hamster">Hamster</option>
+      <option value="parrot">Parrot</option>
+      <option value="spider">Spider</option>
+      <option value="goldfish">Goldfish</option>
+    </select>
+    </div>
+  </div>
+
+
+  <button class="bookingButton" type="submit">Buchen</button>
+
+</div>
+</form>
+</body>
+</html>
+
+<script language="javascript">
+  function openHotel() {
+    window.open("/src/pages/hotels/hotel.html");
+  }
+</script>
