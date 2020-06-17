@@ -67,7 +67,29 @@ header .block nav ul li a:hover {
   padding: 0 10px 0 10px;
 }
 
+.citiesBox {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+  padding: 10px;
+}
 
+.citiesBox span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  height: 100px;
+  width: 100px;
+  background-color: #a67c00;
+  transition: all 0.3s ease;
+}
+
+.citiesBox span:hover{
+  cursor: pointer;
+  opacity: 0.7;
+}
 
 body {
   background-repeat: no-repeat;

@@ -23,13 +23,29 @@
 
 <div class="hotelBlock">
   <div class="titleSearch">
-  <h2>Hotels</h2>
+  <h1>Hotels</h1>
   <div class="searchBlock">
     <input type="text" placeholder="Geben Sie ein Hotelname ein ..."/>
     <button type="button">Suchen</button>
   </div>
   </div>
-  <div class="hotelList"></div>
+  <div class="hotelList">
+    <?php
+    $connection = mysqli_connect('127.0.0.1', 'root', "", "bookingworld");
+    if(!$connection){
+      die("ERROR: Could not connect. " . mysqli_connect_error());
+    } else {
+      $sql = "SELECT * FROM Hotel";
+      $result = mysqli_query($connection, $sql);
+
+      if (mysqli_num_rows($result)>0) {
+        while ($row = mysqli_fetch_array($result)) {
+          echo $row[2];
+        }
+      }
+      }
+    ?>
+  </div>
 </div>
 </body>
 </html>

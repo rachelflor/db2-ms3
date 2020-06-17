@@ -149,4 +149,5 @@ body{
   text-transform: uppercase;
   border-style: none;
   outline: none;
+  cursor: pointer;
 }

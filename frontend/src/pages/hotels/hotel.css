@@ -78,10 +78,8 @@ body {
   font-size: smaller;
   text-transform: uppercase;
   margin-left: 5px;
+  cursor: pointer;
 }
-
-/*.hotelBlock .titleSearch h2 {
-}  */
 
 .hotelBlock .hotelList {
   background-color: white;
