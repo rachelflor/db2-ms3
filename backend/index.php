@@ -28,7 +28,6 @@ function getAllHotels () {
 
     $result = $hotels->fetchAll(PDO::FETCH_OBJ);
    return json_encode($result);
-   // var_dump($result);
     $dbh = null;
 }
 

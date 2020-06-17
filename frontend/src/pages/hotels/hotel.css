@@ -83,5 +83,60 @@ body {
 
 .hotelBlock .hotelList {
   background-color: white;
-  height: 300px;
+  height: 500px;
+  padding: 10px 30px 10px 30px;
+  overflow:hidden;
+  overflow-y:scroll;
+}
+
+.hotelItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0 10px 0;
+  background-color: #b3d4fc;
+  border-radius: 5px;
+}
+
+.hotelItem .itemName {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  line-height: .2em;
+}
+
+.hotelItem .itemName h2 {
+  margin-bottom: 0;
+}
+
+.hotelItem .itemName h4 {
+  font-family: "Georgia, serif;";
+  font-weight: normal;
+}
+
+.hotelItem img {
+  height: 10px;
+  width: 10px;
+  fill: #a67c00;
+
+}
+.hotelItem span {
+  color: #a67c00;
+}
+
+.preisButton {
+  display: flex;
+  flex-direction: column;
+}
+
+.preisButton button {
+  background-color: #a67c00;
+  border-style: none;
+  height: 35px;
+  color: black;
+  outline: none;
+}
+
+.preisButton button:hover {
+  cursor: pointer;
 }
