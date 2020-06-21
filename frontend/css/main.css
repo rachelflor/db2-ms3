@@ -86,6 +86,12 @@ header .block nav ul li a:hover {
   transition: all 0.3s ease;
 }
 
+.citiesBox span a{
+  text-decoration: none;
+  color: black;
+}
+
+
 .citiesBox span:hover{
   cursor: pointer;
   opacity: 0.7;

@@ -149,5 +149,14 @@ body{
   text-transform: uppercase;
   border-style: none;
   outline: none;
+  color: black;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+#errorMessage {
+  color: #FF3232;
+  text-align: center;
+  margin-bottom: 20px;
 }

@@ -1,81 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="reservation.css">
-    <title>Reservierung</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="reservation.css">
+  <title>Reservierung</title>
 
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="http://localhost:63342/frontend/img/icons8-lit-80.png" />
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="http://localhost:63342/frontend/img/icons8-lit-80.png"/>
 
 
 </head>
 <body>
 
 <div class="icon-bar">
-  <a class="active" href="http://localhost:63342/frontend/src/pages/hotels/hotel.html"><img src="http://localhost:63342/frontend/img/hotel.png"/></a>
-  <a href="http://localhost:63342/frontend/src/pages/bars/bar.html"><img src="http://localhost:63342/frontend/img/wine.png"/></a>
-  <a href="http://localhost:63342/frontend/src/pages/booking/booking.html"><img src="http://localhost:63342/frontend/img/calendar.png"/></a>
-  <a href="http://localhost:63342/frontend/src/pages/reservation/reservation.html"><img src="http://localhost:63342/frontend/img/calendarR.png"/></a>
-  <a href="http://localhost:63342/frontend/src/pages/contact/contact.html"><img src="http://localhost:63342/frontend/img/contact.png"/></a>
+  <a class="active" href="http://localhost:63342/frontend/src/pages/hotels/hotel.html"><img
+      src="http://localhost:63342/frontend/img/hotel.png"/></a>
+  <a href="http://localhost:63342/frontend/src/pages/bars/bar.html"><img
+      src="http://localhost:63342/frontend/img/wine.png"/></a>
+  <a href="http://localhost:63342/frontend/src/pages/booking/booking.html"><img
+      src="http://localhost:63342/frontend/img/calendar.png"/></a>
+  <a href="http://localhost:63342/frontend/src/pages/reservation/reservation.html"><img
+      src="http://localhost:63342/frontend/img/calendarR.png"/></a>
+  <a href="http://localhost:63342/frontend/src/pages/contact/contact.html"><img
+      src="http://localhost:63342/frontend/img/contact.png"/></a>
 </div>
 
 <div class="information">
   <h2>Genießen Sie friedliche Momente in vollem Komfort.</h2>
-  <p>Nachdem Sie Ihr Hotel ausgewählt haben, drücken Sie bitte auf den Button "Reservieren", um Ihre persönliche Daten einzugeben.</p>
+  <p>Nachdem Sie Ihr Hotel ausgewählt haben, drücken Sie bitte auf den Button "Reservieren", um Ihre persönliche Daten
+    einzugeben.</p>
   <p>Wenn Sie zu diesem Punkt ein Zimmer buchen möchten, klicken Sie auf das Button unten</p>
   <button type="button" onclick="openBooking()">Go to Buchung</button>
 </div>
-
-
-<form method="post">
+<?php ?>
+<form
+  method="post"
+  action=""
+  onsubmit="window.open(this.href,'_self');return false;"
+  name="reservationForm">
   <div class="bookingBlock">
     <h2>Reserviere dein Hotelzimmer</h2>
     <h5>Buche online. Aufenthaltsräume mit Check-in und Check-out am selben Tag</h5>
     <div class="inputBlock">
+      <span id="errorMessage"></span>
       <label for="arrivalDate">Ankunft</label>
-      <input type="date" id="arrivalDate"/>
+      <input type="date" id="arrivalDate" name="arrivalDate"/>
     </div>
     <div class="inputBlock">
       <label for="departureDate">Abreise</label>
-      <input type="date" id="departureDate"/>
+      <input type="date" id="departureDate" name="departureDate"/>
     </div>
     <div class="inputBlock">
       <label for="country">Land</label>
       <div class="inputBlockSelect">
-        <select id="country" name="country">
-          <option value="Deutschland">Deutschland</option>
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
-          <option value="hamster">Hamster</option>
-          <option value="parrot">Parrot</option>
-          <option value="spider">Spider</option>
-          <option value="goldfish">Goldfish</option>
-        </select>
+        <?php
+        include_once('/Users/rachel/PhpstormProjects/frontend/connection.php');
+        $connection = dbconnection();
+
+        echo '<select id="country" name="countries">';
+        echo '<option id="emptySelect" value="">' . "" . '</option>';
+        if (!isset($_GET['hotel_id'])) {
+          $sql = "SELECT DISTINCT Land from Hotel";
+        } else {
+          $id = $_GET['hotel_id'];
+          $sql = "SELECT HotelName, Ort, Land from Hotel where Hotel_ID = $id";
+        }
+        $result = mysqli_query($connection, $sql);
+        var_dump($result);
+        print_r($result);
+        if (mysqli_num_rows($result) == 1) {
+          while ($data = mysqli_fetch_array($result)) {
+            $_GET['HotelName'] = $data['HotelName'];
+            $_GET['Ort'] = $data['Ort'];
+            echo '<option value="' . $data['Land'] . '" selected>' . $data['Land'] . '</option>';
+          }
+        } elseif (mysqli_num_rows($result) > 1) {
+          while ($data = mysqli_fetch_array($result)) {
+            $_GET['daten'] = $data;
+            $_GET['HotelName'] = $data['HotelName'];
+            $_GET['Ort'] = $data['Ort'];
+            $_GET['Land'] = $data['Land'];
+            echo '<option value="' . $data['Land'] . '">' . $data['Land'] . '</option>';
+          }
+        }
+        echo '</select>';
+
+        ?>
       </div>
     </div>
+
 
     <div class="inputBlock">
       <label for="hotel">Hotel</label>
       <div class="inputBlockSelect">
-        <select id="hotel" name="hotel">
-          <option value="Deutschland">Deutschland</option>
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
-          <option value="hamster">Hamster</option>
-          <option value="parrot">Parrot</option>
-          <option value="spider">Spider</option>
-          <option value="goldfish">Goldfish</option>
-        </select>
+        <?php
+        echo '<select id="hotel" name="hotels">';
+        if (isset($_GET['hotel_id'])) {
+          echo '<option selected>' . $_GET['HotelName'] . "-" . $_GET['Ort'] . '</option>';
+        } else {
+        }
+        echo '</select>';
+
+        ?>
       </div>
     </div>
 
-
-    <button class="bookingButton" type="submit">Reservieren</button>
+    <a
+      href="http://localhost:63342/frontend/src/pages/Data/data.html?
+      arrivalDate=<?=$_GET['arrivalDate']?>&
+      departureDate=<?=$_GET['departureDate']?>&
+      land=<?=$_GET['Land'] ?>&
+      hotel_name=<?= $_GET['HotelName']?>"
+      class="bookingButton"
+      id="submit"
+      onclick="validateData()">Reservieren</a>
 
   </div>
 </form>
+
 </body>
 </html>
 
@@ -83,6 +126,33 @@
 <script language="javascript">
   function openBooking() {
     window.open("/src/pages/booking/booking.html");
+  }
+
+  function enableHotelList() {
+    if (!document.getElementById("emptySelect").selected) {
+      document.getElementById("hotel").disabled = false;
+    } else {
+      document.getElementById("hotel").disabled = true;
+    }
+  }
+
+  function validateData() {
+    var date = new Date();
+    var dateYear = date.getFullYear();
+    var dateMounth = date.getMonth();
+    var dateDay = date.getDay();
+    var fullDate = dateYear + "-" + dateMounth + "-" + dateDay;
+    if (document.getElementById("arrivalDate").value === "" || document.getElementById("departureDate").value === "") {
+      document.getElementById("errorMessage").textContent = "Ankunft- oder Abreisedatum bitte auswählen!"
+    } else if (document.getElementById("arrivalDate").value > fullDate || document.getElementById("departureDate").value > fullDate) {
+      document.getElementById("errorMessage").textContent = "Ankunft- und Abreisedatum darf nicht in der Vergangenheit sein!";
+    } else if (document.getElementById("departureDate").value < document.getElementById("arrivalDate").value) {
+      document.getElementById("errorMessage").textContent = "Abreisedatum darf nicht vor dem Ankunftdatum liegen!"
+    } else if (document.getElementById("emptySelect").selected) {
+      document.getElementById("errorMessage").textContent = "Wählen Sie bitte Ihr Zielland!";
+    } else {
+      document.getElementById("errorMessage").textContent = "";
+    }
   }
 </script>
 

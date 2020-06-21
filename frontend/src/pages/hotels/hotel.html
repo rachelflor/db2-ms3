@@ -1,69 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="hotel.css">
-    <title>Hotels</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="hotel.css">
+  <title>Hotels</title>
 
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="http://localhost:63342/frontend/img/icons8-lit-80.png" />
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="http://localhost:63342/frontend/img/icons8-lit-80.png"/>
 
 
 </head>
 <body>
 
 <div class="icon-bar">
-  <a class="active" href="http://localhost:63342/frontend/src/pages/hotels/hotel.html"><img src="http://localhost:63342/frontend/img/hotel.png"/></a>
-  <a href="http://localhost:63342/frontend/src/pages/bars/bar.html"><img src="http://localhost:63342/frontend/img/wine.png"/></a>
-  <a href="http://localhost:63342/frontend/src/pages/booking/booking.html"><img src="http://localhost:63342/frontend/img/calendar.png"/></a>
-  <a href="http://localhost:63342/frontend/src/pages/reservation/reservation.html"><img src="http://localhost:63342/frontend/img/calendarR.png"/></a>
-  <a href="http://localhost:63342/frontend/src/pages/contact/contact.html"><img src="http://localhost:63342/frontend/img/contact.png"/></a>
+  <a class="active" href="http://localhost:63342/frontend/src/pages/hotels/hotel.html"><img
+      src="http://localhost:63342/frontend/img/hotel.png"/></a>
+  <a href="http://localhost:63342/frontend/src/pages/bars/bar.html"><img
+      src="http://localhost:63342/frontend/img/wine.png"/></a>
+  <a href="http://localhost:63342/frontend/src/pages/booking/booking.html"><img
+      src="http://localhost:63342/frontend/img/calendar.png"/></a>
+  <a href="http://localhost:63342/frontend/src/pages/reservation/reservation.html"><img
+      src="http://localhost:63342/frontend/img/calendarR.png"/></a>
+  <a href="http://localhost:63342/frontend/src/pages/contact/contact.html"><img
+      src="http://localhost:63342/frontend/img/contact.png"/></a>
 </div>
 
 <div class="hotelBlock">
   <div class="titleSearch">
-  <h1>Hotels</h1>
-  <div class="searchBlock">
-    <input type="text" placeholder="Geben Sie ein Hotelname ein ..."/>
-    <button type="button">Suchen</button>
-  </div>
+    <h1>Hotels</h1>
+    <div class="searchBlock">
+      <input type="text" placeholder="Geben Sie ein Hotelname ein ..."/>
+      <button type="button">Suchen</button>
+    </div>
   </div>
   <div class="hotelList" type="list">
     <?php
-    $connection = mysqli_connect('127.0.0.1', 'root', "", "bookingworld");
-    if(!$connection){
-      die("ERROR: Could not connect. " . mysqli_connect_error());
-    } else {
+    include_once('/Users/rachel/PhpstormProjects/frontend/connection.php');
+    $connection = dbconnection();
+    if(!isset($_GET['ort'])){
       $sql = "SELECT * FROM Hotel";
-      $result = mysqli_query($connection, $sql);
-
-      if (mysqli_num_rows($result)>0) {
-        while ($row = mysqli_fetch_array($result)) {
-          echo '<div class="hotelItem">';
-          echo '<div class="itemName">';
-          echo '<h2>'. $row["HotelName"] .'</h2>';
-          echo '<h4>'. $row["Ort"]. " - ". $row["Land"] .'</h4>';
-          echo '</div>';
-          echo '<h4>'. $row["Familienfreundlich"] .'</h4>';
-
-          echo '<div>';
-          for ($i = 1; $i <= $row["AnzahlSterne"]; $i++) {
-            echo '<img src="http://localhost:63342/frontend/img/star.svg" alt=""/>';
-          }
-          echo '</div>';
-
-          echo '<div class="preisButton">';
-          echo '<span>'. "Ab 25 €" .'</span>';
-          echo '<button>'. "Zum Angebot" .'</button>';
-          echo '</div>';
-
-          echo '</div>';
-        }
-      }
-      }
+    } else {
+      $ort = $_GET['ort'];
+      $sql = "SELECT * FROM Hotel WHERE Ort like '$ort'";
+    }
+    $result = mysqli_query($connection, $sql);
     ?>
+
+    <?php if (mysqli_num_rows($result) > 0): ?>
+      <?php while ($data = $result->fetch_object()): ?>
+        <div class="hotelItem">
+          <div class="itemName">
+            <h2> <?= $data->HotelName ?> </h2>
+            <h4> <?= $data->Ort ?> </h4>
+            <h4> <?= $data->Familienfreundlich ?> </h4>
+          </div>
+        </div>
+
+        <div>
+          <?php for ($i = 1; $i < $data->AnzahlSterne; $i++): ?>
+            <img width="20px" height="20px" src="http://localhost:63342/frontend/img/star.svg" alt=""/>
+          <?php endfor; ?>
+        </div>
+
+
+        <div class="preisButton">
+          <span> Ab <?= getMinRoomPriceByHotelId($data->Hotel_ID) ?>  € </span>
+          <a href="http://localhost:63342/frontend/src/pages/reservation/reservation.html?hotel_id=<?= $data->Hotel_ID ?>"
+          >reservieren</a>
+        </div>
+      <?php endwhile; ?>
+    <?php endif; ?>
+
   </div>
 </div>
 </body>
 </html>
+</script>
